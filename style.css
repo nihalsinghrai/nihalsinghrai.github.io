@@ -1,9 +1,8 @@
 /* ========================================
-   DESIGN SYSTEM
+   DESIGN TOKENS
 ======================================== */
 
 :root {
-
   --bg: #FAF9F6;
   --text: #111111;
   --muted: #686868;
@@ -11,6 +10,33 @@
   --border: #E5E5E5;
 
   --max-width: 1200px;
+}
+
+
+/* ========================================
+   DARK THEME
+======================================== */
+
+html[data-theme="dark"] {
+  --bg: #111111;
+  --text: #FAF9F6;
+  --muted: #A1A1A1;
+  --border: #292929;
+}
+
+
+/* ========================================
+   SYSTEM THEME
+======================================== */
+
+@media (prefers-color-scheme: dark) {
+
+  html[data-theme="system"] {
+    --bg: #111111;
+    --text: #FAF9F6;
+    --muted: #A1A1A1;
+    --border: #292929;
+  }
 
 }
 
@@ -32,7 +58,6 @@ html {
 
 
 body {
-
   font-family:
     Inter,
     Arial,
@@ -46,12 +71,11 @@ body {
 
   overflow-x: hidden;
 
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease;
 }
 
-
-/* ========================================
-   GLOBAL
-======================================== */
 
 a {
   color: inherit;
@@ -75,13 +99,11 @@ section {
 
 
 /* ========================================
-   TECHNICAL ANIMATED BACKGROUND
+   TECHNICAL BACKGROUND
 ======================================== */
 
 .tech-bg {
-
   position: fixed;
-
   inset: 0;
 
   z-index: -1;
@@ -90,26 +112,22 @@ section {
 
   pointer-events: none;
 
-  background: #FAF9F6;
+  background: var(--bg);
 
+  transition:
+    background-color 0.25s ease;
 }
 
 
-/* Technical grid */
-
 .tech-grid {
-
   position: absolute;
-
   inset: -50px;
 
   background-image:
-
     linear-gradient(
       rgba(17, 17, 17, 0.035) 1px,
       transparent 1px
     ),
-
     linear-gradient(
       90deg,
       rgba(17, 17, 17, 0.035) 1px,
@@ -127,14 +145,30 @@ section {
 
   animation:
     gridMove 18s linear infinite;
+}
+
+
+html[data-theme="dark"] .tech-grid {
+
+  background-image:
+    linear-gradient(
+      rgba(250, 249, 246, 0.035) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(250, 249, 246, 0.035) 1px,
+      transparent 1px
+    );
 
 }
 
 
-/* Moving technical lines */
+/* ========================================
+   TECH LINES
+======================================== */
 
 .tech-line {
-
   position: absolute;
 
   height: 1px;
@@ -151,26 +185,20 @@ section {
 
   animation:
     lineMove 8s ease-in-out infinite;
-
 }
 
 
-/* Individual lines */
-
 .line-1 {
-
   width: 280px;
 
   top: 24%;
   left: 8%;
 
   transform: rotate(18deg);
-
 }
 
 
 .line-2 {
-
   width: 360px;
 
   top: 62%;
@@ -179,12 +207,10 @@ section {
   transform: rotate(-22deg);
 
   animation-delay: 2s;
-
 }
 
 
 .line-3 {
-
   width: 220px;
 
   top: 38%;
@@ -193,16 +219,14 @@ section {
   transform: rotate(145deg);
 
   animation-delay: 4s;
-
 }
 
 
 /* ========================================
-   TECHNICAL NODES
+   TECH NODES
 ======================================== */
 
 .tech-node {
-
   position: absolute;
 
   width: 5px;
@@ -213,7 +237,6 @@ section {
   background: var(--accent);
 
   box-shadow:
-
     0 0 0 4px
     rgba(155, 225, 93, 0.08),
 
@@ -222,82 +245,70 @@ section {
 
   animation:
     nodeFloat 6s ease-in-out infinite;
-
 }
 
 
-/* Node positions */
-
 .node-1 {
-
   top: 20%;
   left: 12%;
-
 }
 
 
 .node-2 {
-
   top: 32%;
   right: 18%;
 
   animation-delay: 1s;
-
 }
 
 
 .node-3 {
-
   top: 68%;
   left: 24%;
 
   animation-delay: 2s;
-
 }
 
 
 .node-4 {
-
   top: 76%;
   right: 12%;
 
   animation-delay: 3s;
-
 }
 
 
 .node-5 {
-
   top: 46%;
   left: 72%;
 
   animation-delay: 4s;
-
 }
 
 
 /* ========================================
-   ORBITAL SHAPES
+   ORBITS
 ======================================== */
 
 .tech-orbit {
-
   position: absolute;
 
   border:
     1px solid
-    rgba(17, 17, 17, 0.045);
+    color-mix(
+      in srgb,
+      var(--text) 5%,
+      transparent
+    );
 
   border-radius: 50%;
 
   animation:
     orbitMove 14s linear infinite;
-
 }
 
 
 .orbit-1 {
-
   width: 420px;
   height: 180px;
 
@@ -305,12 +316,10 @@ section {
   right: -100px;
 
   transform: rotate(-18deg);
-
 }
 
 
 .orbit-2 {
-
   width: 300px;
   height: 130px;
 
@@ -320,7 +329,6 @@ section {
   transform: rotate(20deg);
 
   animation-direction: reverse;
-
 }
 
 
@@ -329,7 +337,6 @@ section {
 ======================================== */
 
 header {
-
   width: min(
     var(--max-width),
     calc(100% - 48px)
@@ -338,12 +345,10 @@ header {
   margin: 0 auto;
 
   padding: 28px 0;
-
 }
 
 
 nav {
-
   display: flex;
 
   align-items: center;
@@ -351,36 +356,27 @@ nav {
   justify-content: space-between;
 
   gap: 32px;
-
 }
 
 
 nav > div {
-
   display: flex;
 
   align-items: center;
 
   gap: 28px;
-
 }
 
 
 nav a {
-
   font-size: 14px;
-
   font-weight: 500;
-
 }
 
 
 nav > a {
-
   font-weight: 700;
-
   letter-spacing: -0.02em;
-
 }
 
 
@@ -389,7 +385,6 @@ nav > a {
 ======================================== */
 
 #home {
-
   min-height: 720px;
 
   display: grid;
@@ -401,12 +396,10 @@ nav > a {
   align-items: center;
 
   gap: 80px;
-
 }
 
 
 #home > div:first-child > p:first-child {
-
   margin-bottom: 20px;
 
   color: var(--text);
@@ -416,12 +409,10 @@ nav > a {
   font-weight: 700;
 
   letter-spacing: 0.16em;
-
 }
 
 
 #home h1 {
-
   max-width: 800px;
 
   font-size:
@@ -432,12 +423,10 @@ nav > a {
   letter-spacing: -0.065em;
 
   margin-bottom: 32px;
-
 }
 
 
 #home > div:first-child > p:nth-of-type(2) {
-
   max-width: 560px;
 
   font-size: 18px;
@@ -445,56 +434,43 @@ nav > a {
   line-height: 1.7;
 
   margin-bottom: 36px;
-
 }
 
 
-/* Hero buttons */
-
 #home > div:first-child > div {
-
   display: flex;
 
   gap: 12px;
 
   flex-wrap: wrap;
-
 }
 
 
 #home > div:first-child > div a {
-
   padding: 13px 20px;
 
   border: 1px solid var(--text);
 
   font-size: 14px;
-
 }
 
 
 #home > div:first-child > div a:first-child {
-
   background: var(--text);
 
   color: var(--bg);
-
 }
 
 
-/* Hero aside */
-
 #home aside {
-
   padding-left: 28px;
 
-  border-left: 1px solid var(--border);
-
+  border-left:
+    1px solid var(--border);
 }
 
 
 #home aside p:first-child {
-
   font-size: 11px;
 
   font-weight: 700;
@@ -502,12 +478,10 @@ nav > a {
   letter-spacing: 0.15em;
 
   margin-bottom: 16px;
-
 }
 
 
 #home aside h2 {
-
   font-size: 30px;
 
   line-height: 1;
@@ -515,12 +489,11 @@ nav > a {
   letter-spacing: -0.04em;
 
   margin-bottom: 16px;
-
 }
 
 
 /* ========================================
-   GENERAL SECTION SPACING
+   SECTIONS
 ======================================== */
 
 #stack,
@@ -528,17 +501,14 @@ nav > a {
 #build,
 #about,
 #process {
-
   padding: 140px 0;
 
   border-top:
     1px solid var(--border);
-
 }
 
 
 section > div:first-child > p:first-child {
-
   color: var(--text);
 
   font-size: 11px;
@@ -548,19 +518,16 @@ section > div:first-child > p:first-child {
   letter-spacing: 0.15em;
 
   margin-bottom: 18px;
-
 }
 
 
 section h2 {
-
   font-size:
     clamp(42px, 6vw, 76px);
 
   line-height: 0.95;
 
   letter-spacing: -0.055em;
-
 }
 
 
@@ -569,27 +536,22 @@ section h2 {
 ======================================== */
 
 #stack > div:first-child {
-
   max-width: 600px;
 
   margin-bottom: 70px;
-
 }
 
 
 #stack > div:first-child p:last-child {
-
   max-width: 480px;
 
   margin-top: 24px;
 
   font-size: 17px;
-
 }
 
 
 #stack > div:last-child {
-
   display: grid;
 
   grid-template-columns:
@@ -600,31 +562,25 @@ section h2 {
 
   border-bottom:
     1px solid var(--border);
-
 }
 
 
 #stack > div:last-child > div {
-
   min-height: 240px;
 
   padding: 28px;
 
   border-right:
     1px solid var(--border);
-
 }
 
 
 #stack > div:last-child > div:last-child {
-
   border-right: none;
-
 }
 
 
 #stack span {
-
   display: block;
 
   margin-bottom: 70px;
@@ -632,25 +588,20 @@ section h2 {
   color: var(--muted);
 
   font-size: 12px;
-
 }
 
 
 #stack h3 {
-
   font-size: 22px;
 
   letter-spacing: -0.03em;
 
   margin-bottom: 10px;
-
 }
 
 
 #stack p {
-
   font-size: 14px;
-
 }
 
 
@@ -659,7 +610,6 @@ section h2 {
 ======================================== */
 
 #work > div:first-child {
-
   display: grid;
 
   grid-template-columns:
@@ -668,47 +618,44 @@ section h2 {
   gap: 60px;
 
   margin-bottom: 70px;
-
 }
 
 
 #work > div:first-child > p:last-child {
-
   max-width: 420px;
 
   font-size: 17px;
-
 }
 
 
 #work > div:last-child {
-
   display: grid;
 
   grid-template-columns:
     repeat(2, 1fr);
 
   gap: 20px;
-
 }
 
 
 #work article {
-
   min-height: 360px;
 
   padding: 32px;
 
-  border: 1px solid var(--border);
+  border:
+    1px solid var(--border);
 
   background:
-    rgba(250, 249, 246, 0.55);
-
+    color-mix(
+      in srgb,
+      var(--bg) 70%,
+      transparent
+    );
 }
 
 
 #work article span {
-
   font-size: 11px;
 
   font-weight: 700;
@@ -716,18 +663,15 @@ section h2 {
   letter-spacing: 0.12em;
 
   color: var(--muted);
-
 }
 
 
 #work article h3 {
-
   margin-top: 150px;
 
   font-size: 30px;
 
   letter-spacing: -0.04em;
-
 }
 
 
@@ -736,38 +680,31 @@ section h2 {
 ======================================== */
 
 #build > div:first-child {
-
   margin-bottom: 70px;
-
 }
 
 
 #build > div:last-child {
-
   display: grid;
 
   grid-template-columns:
     repeat(3, 1fr);
 
   gap: 20px;
-
 }
 
 
 #build article {
-
   padding: 32px;
 
   min-height: 300px;
 
   border-top:
     1px solid var(--text);
-
 }
 
 
 #build article span {
-
   display: block;
 
   margin-bottom: 80px;
@@ -775,27 +712,22 @@ section h2 {
   font-size: 12px;
 
   color: var(--muted);
-
 }
 
 
 #build article h3 {
-
   font-size: 26px;
 
   letter-spacing: -0.04em;
 
   margin-bottom: 16px;
-
 }
 
 
 #build article p {
-
   font-size: 15px;
 
   line-height: 1.7;
-
 }
 
 
@@ -804,41 +736,33 @@ section h2 {
 ======================================== */
 
 #about {
-
   display: grid;
 
   grid-template-columns:
     1fr 1fr;
 
   gap: 100px;
-
 }
 
 
 #about > div:first-child h2 {
-
   max-width: 600px;
-
 }
 
 
 #about > div:last-child {
-
   max-width: 520px;
 
   padding-top: 45px;
-
 }
 
 
 #about > div:last-child p {
-
   font-size: 18px;
 
   line-height: 1.8;
 
   margin-bottom: 24px;
-
 }
 
 
@@ -847,14 +771,11 @@ section h2 {
 ======================================== */
 
 #process > div:first-child {
-
   margin-bottom: 70px;
-
 }
 
 
 #process > div:last-child {
-
   display: grid;
 
   grid-template-columns:
@@ -862,31 +783,25 @@ section h2 {
 
   border-top:
     1px solid var(--border);
-
 }
 
 
 #process article {
-
   padding: 28px;
 
   min-height: 280px;
 
   border-right:
     1px solid var(--border);
-
 }
 
 
 #process article:last-child {
-
   border-right: none;
-
 }
 
 
 #process article span {
-
   display: block;
 
   margin-bottom: 70px;
@@ -894,25 +809,20 @@ section h2 {
   color: var(--muted);
 
   font-size: 12px;
-
 }
 
 
 #process h3 {
-
   font-size: 24px;
 
   margin-bottom: 14px;
-
 }
 
 
 #process article p {
-
   font-size: 14px;
 
   line-height: 1.7;
-
 }
 
 
@@ -921,19 +831,16 @@ section h2 {
 ======================================== */
 
 #contact {
-
   padding: 160px 0;
 
   border-top:
     1px solid var(--border);
 
   text-align: center;
-
 }
 
 
 #contact p {
-
   color: var(--text);
 
   font-size: 11px;
@@ -943,21 +850,17 @@ section h2 {
   letter-spacing: 0.15em;
 
   margin-bottom: 24px;
-
 }
 
 
 #contact h2 {
-
   max-width: 850px;
 
   margin: 0 auto 40px;
-
 }
 
 
 #contact a {
-
   display: inline-block;
 
   padding: 15px 24px;
@@ -967,7 +870,6 @@ section h2 {
   color: var(--bg);
 
   font-size: 14px;
-
 }
 
 
@@ -976,7 +878,6 @@ section h2 {
 ======================================== */
 
 footer {
-
   width: min(
     var(--max-width),
     calc(100% - 48px)
@@ -994,30 +895,23 @@ footer {
   align-items: center;
 
   justify-content: space-between;
-
 }
 
 
 footer p {
-
   font-size: 13px;
-
 }
 
 
 footer > div {
-
   display: flex;
 
   gap: 24px;
-
 }
 
 
 footer a {
-
   font-size: 13px;
-
 }
 
 
@@ -1042,23 +936,19 @@ footer a {
 
   0%,
   100% {
-
     opacity: 0.15;
 
     transform:
       scaleX(0.8)
       rotate(18deg);
-
   }
 
   50% {
-
     opacity: 0.55;
 
     transform:
       scaleX(1)
       rotate(18deg);
-
   }
 
 }
@@ -1068,17 +958,13 @@ footer a {
 
   0%,
   100% {
-
     transform:
       translate(0, 0);
-
   }
 
   50% {
-
     transform:
       translate(8px, -12px);
-
   }
 
 }
@@ -1087,24 +973,18 @@ footer a {
 @keyframes orbitMove {
 
   0% {
-
     transform:
       rotate(0deg);
-
   }
 
   50% {
-
     transform:
       rotate(8deg);
-
   }
 
   100% {
-
     transform:
       rotate(0deg);
-
   }
 
 }
@@ -1117,90 +997,68 @@ footer a {
 @media (max-width: 900px) {
 
   nav > div:nth-child(2) {
-
     display: none;
-
   }
 
 
   #home {
-
     grid-template-columns: 1fr;
 
     min-height: 650px;
 
     gap: 50px;
-
   }
 
 
   #home aside {
-
     max-width: 400px;
-
   }
 
 
   #stack > div:last-child {
-
     grid-template-columns:
       repeat(2, 1fr);
-
   }
 
 
   #stack > div:last-child > div:nth-child(2) {
-
     border-right: none;
-
   }
 
 
   #stack > div:last-child > div {
-
     border-bottom:
       1px solid var(--border);
-
   }
 
 
   #build > div:last-child {
-
     grid-template-columns: 1fr;
-
   }
 
 
   #about {
-
     grid-template-columns: 1fr;
 
     gap: 50px;
-
   }
 
 
   #about > div:last-child {
-
     padding-top: 0;
-
   }
 
 
   #process > div:last-child {
-
     grid-template-columns: 1fr;
-
   }
 
 
   #process article {
-
     border-right: none;
 
     border-bottom:
       1px solid var(--border);
-
   }
 
 }
@@ -1215,67 +1073,49 @@ footer a {
   header,
   footer,
   section {
-
     width:
       calc(100% - 32px);
-
   }
 
 
   header {
-
     padding: 20px 0;
-
   }
 
 
   nav > div:first-of-type {
-
     display: none;
-
   }
 
 
   nav {
-
     justify-content: space-between;
-
   }
 
 
   nav > div:last-child {
-
     gap: 16px;
-
   }
 
 
   nav a {
-
     font-size: 12px;
-
   }
 
 
   #home {
-
     min-height: 650px;
-
   }
 
 
   #home h1 {
-
     font-size:
       clamp(52px, 15vw, 80px);
-
   }
 
 
   #home > div:first-child > p:nth-of-type(2) {
-
     font-size: 16px;
-
   }
 
 
@@ -1284,104 +1124,78 @@ footer a {
   #build,
   #about,
   #process {
-
     padding: 100px 0;
-
   }
 
 
   #stack > div:last-child {
-
     grid-template-columns: 1fr;
-
   }
 
 
   #stack > div:last-child > div {
-
     border-right: none;
 
     border-bottom:
       1px solid var(--border);
-
   }
 
 
   #stack > div:last-child > div:last-child {
-
     border-bottom: none;
-
   }
 
 
   #work > div:first-child {
-
     grid-template-columns: 1fr;
 
     gap: 24px;
-
   }
 
 
   #work > div:last-child {
-
     grid-template-columns: 1fr;
-
   }
 
 
   #work article {
-
     min-height: 300px;
-
   }
 
 
   #work article h3 {
-
     margin-top: 100px;
-
   }
 
 
   #contact {
-
     padding: 110px 0;
-
   }
 
 
   footer {
-
     flex-direction: column;
 
     align-items: flex-start;
 
     gap: 16px;
-
   }
 
 
   .tech-grid {
-
     background-size: 36px 36px;
 
     opacity: 0.7;
-
   }
 
 
   .tech-line {
-
     opacity: 0.5;
-
   }
 
 
   .tech-orbit {
-
     opacity: 0.5;
-
   }
 
 }
@@ -1397,9 +1211,7 @@ footer a {
   .tech-line,
   .tech-node,
   .tech-orbit {
-
     animation: none;
-
   }
 
 }
