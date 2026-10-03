@@ -51,52 +51,75 @@
   ========================================= -->
 
   <header>
+<nav>
 
-    <nav>
+  <a href="#home">
+    NIHAL SINGH RAI
+  </a>
 
-      <a href="#">
-        NIHAL SINGH RAI
-      </a>
+  <div class="nav-links">
+    <a href="#work">Work</a>
+    <a href="#build">What I Build</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </div>
 
+  <div class="nav-actions">
 
-      <div>
+    <a href="https://github.com/nihalsinghrai">
+      GitHub ↗
+    </a>
 
-        <a href="#work">
-          Work
-        </a>
+    <a href="#">
+      LinkedIn ↗
+    </a>
 
-        <a href="#build">
-          What I Build
-        </a>
+  </div>
 
-        <a href="#about">
-          About
-        </a>
+  <div class="theme-control">
 
-        <a href="#contact">
-          Contact
-        </a>
+    <button
+      class="theme-button"
+      id="themeButton"
+      type="button"
+      aria-label="Change theme"
+    >
+      <span class="theme-icon">◐</span>
+      <span class="theme-label">System</span>
+    </button>
 
-      </div>
+    <div
+      class="theme-menu"
+      id="themeMenu"
+      hidden
+    >
+      <button type="button" data-theme-choice="system">
+        ◐ System
+      </button>
 
+      <button type="button" data-theme-choice="light">
+        ☼ Light
+      </button>
 
-      <div>
+      <button type="button" data-theme-choice="dark">
+        ☾ Dark
+      </button>
+    </div>
 
-        <a
-          href="https://github.com/nihalsinghrai"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          GitHub ↗
-        </a>
+  </div>
 
-        <a href="#">
-          LinkedIn ↗
-        </a>
+  <button
+    class="mobile-menu-button"
+    id="mobileMenuButton"
+    type="button"
+    aria-label="Open menu"
+  >
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
 
-      </div>
-
-    </nav>
+</nav>
 
   </header>
 
