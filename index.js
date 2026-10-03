@@ -1,76 +1,59 @@
 /* ========================================
-   PORTFOLIO INTERACTION SYSTEM
-   Nihal Singh Rai
+   NIHAl SINGH RAI — PORTFOLIO JS
 ======================================== */
 
 
 /* ========================================
-   1. BASIC SETUP
+   01. THEME SYSTEM
 ======================================== */
 
-const body = document.body;
-const header = document.querySelector("header");
-const nav = document.querySelector("nav");
+const themeButton = document.getElementById("themeButton");
+const themeMenu = document.getElementById("themeMenu");
+const themeChoices = document.querySelectorAll("[data-theme-choice]");
 
-const prefersReducedMotion = window.matchMedia(
-  "(prefers-reduced-motion: reduce)"
+const systemTheme = window.matchMedia(
+  "(prefers-color-scheme: dark)"
 );
-
-
-/* ========================================
-   2. THEME SYSTEM
-======================================== */
-
-/*
-   Available modes:
-
-   system
-   light
-   dark
-
-   System = device/browser preference
-*/
-
-const THEME_KEY = "portfolio-theme";
-
-const savedTheme =
-  localStorage.getItem(THEME_KEY) || "system";
-
-
-/* Detect system theme */
-
-function getSystemTheme() {
-
-  return window.matchMedia(
-    "(prefers-color-scheme: dark)"
-  ).matches
-    ? "dark"
-    : "light";
-
-}
 
 
 /* Apply actual visual theme */
 
 function applyTheme(theme) {
 
-  const actualTheme =
-    theme === "system"
-      ? getSystemTheme()
-      : theme;
+  let actualTheme = theme;
 
+  /*
+    If user selected System,
+    detect the device theme.
+  */
 
-  document.documentElement.dataset.theme =
-    actualTheme;
+  if (theme === "system") {
 
+    actualTheme = systemTheme.matches
+      ? "dark"
+      : "light";
 
-  document.documentElement.dataset.themePreference =
-    theme;
+  }
 
 
   /*
-     CSS variables are changed here so the
-     entire design can react to the theme.
+    Tell CSS which theme is active.
+  */
+
+  document.documentElement.setAttribute(
+    "data-theme",
+    actualTheme
+  );
+
+
+  document.documentElement.setAttribute(
+    "data-theme-preference",
+    theme
+  );
+
+
+  /*
+    Update CSS variables.
   */
 
   if (actualTheme === "dark") {
@@ -130,218 +113,165 @@ function applyTheme(theme) {
   }
 
 
-  updateThemeButton(theme);
+  /*
+    Update button text.
+  */
 
-}
+  if (themeButton) {
 
+    const icon =
+      themeButton.querySelector(".theme-icon");
 
-/* Save selected preference */
-
-function setTheme(theme) {
-
-  localStorage.setItem(
-    THEME_KEY,
-    theme
-  );
-
-  applyTheme(theme);
-
-}
+    const label =
+      themeButton.querySelector(".theme-label");
 
 
-/* ========================================
-   3. THEME SELECTOR UI
-======================================== */
+    if (theme === "system") {
 
-const themeControl = document.createElement("div");
-
-themeControl.className = "theme-control";
-
-themeControl.innerHTML = `
-  <button
-    class="theme-button"
-    type="button"
-    aria-expanded="false"
-    aria-label="Change color theme"
-  >
-    <span class="theme-icon">◐</span>
-    <span class="theme-label">System</span>
-  </button>
-
-  <div class="theme-menu" hidden>
-
-    <button
-      type="button"
-      data-theme-choice="system"
-    >
-      <span>◐</span>
-      System
-    </button>
-
-    <button
-      type="button"
-      data-theme-choice="light"
-    >
-      <span>☼</span>
-      Light
-    </button>
-
-    <button
-      type="button"
-      data-theme-choice="dark"
-    >
-      <span>☾</span>
-      Dark
-    </button>
-
-  </div>
-`;
-
-
-/*
-   Put theme selector into navigation.
-
-   It is appended to the right side of nav.
-*/
-
-nav.appendChild(themeControl);
-
-
-const themeButton =
-  themeControl.querySelector(".theme-button");
-
-const themeMenu =
-  themeControl.querySelector(".theme-menu");
-
-const themeLabel =
-  themeControl.querySelector(".theme-label");
-
-const themeIcon =
-  themeControl.querySelector(".theme-icon");
-
-
-/* Theme labels */
-
-const themeData = {
-
-  system: {
-    label: "System",
-    icon: "◐"
-  },
-
-  light: {
-    label: "Light",
-    icon: "☼"
-  },
-
-  dark: {
-    label: "Dark",
-    icon: "☾"
-  }
-
-};
-
-
-/* Update button */
-
-function updateThemeButton(theme) {
-
-  const data =
-    themeData[theme] || themeData.system;
-
-  themeLabel.textContent =
-    data.label;
-
-  themeIcon.textContent =
-    data.icon;
-
-}
-
-
-/* Open / close theme menu */
-
-themeButton.addEventListener(
-  "click",
-  function (event) {
-
-    event.stopPropagation();
-
-    const isOpen =
-      themeButton.getAttribute(
-        "aria-expanded"
-      ) === "true";
-
-    themeButton.setAttribute(
-      "aria-expanded",
-      String(!isOpen)
-    );
-
-    themeMenu.hidden = isOpen;
-
-  }
-);
-
-
-/* Theme selection */
-
-themeMenu
-  .querySelectorAll("[data-theme-choice]")
-  .forEach(function (button) {
-
-    button.addEventListener(
-      "click",
-      function () {
-
-        const selectedTheme =
-          button.dataset.themeChoice;
-
-        setTheme(selectedTheme);
-
-        themeMenu.hidden = true;
-
-        themeButton.setAttribute(
-          "aria-expanded",
-          "false"
-        );
-
+      if (icon) {
+        icon.textContent = "◐";
       }
-    );
 
-  });
+      if (label) {
+        label.textContent = "System";
+      }
+
+    }
 
 
-/* Close theme menu outside click */
+    if (theme === "light") {
 
-document.addEventListener(
-  "click",
-  function (event) {
+      if (icon) {
+        icon.textContent = "☼";
+      }
 
-    if (
-      !themeControl.contains(event.target)
-    ) {
+      if (label) {
+        label.textContent = "Light";
+      }
 
-      themeMenu.hidden = true;
+    }
 
-      themeButton.setAttribute(
-        "aria-expanded",
-        "false"
-      );
+
+    if (theme === "dark") {
+
+      if (icon) {
+        icon.textContent = "☾";
+      }
+
+      if (label) {
+        label.textContent = "Dark";
+      }
 
     }
 
   }
-);
+
+}
+
+
+/* Get saved theme */
+
+const savedTheme =
+  localStorage.getItem("portfolio-theme") || "system";
+
+
+/* Apply theme when page loads */
+
+applyTheme(savedTheme);
 
 
 /* ========================================
-   4. SYSTEM THEME DETECTION
+   02. THEME BUTTON
 ======================================== */
 
-const systemTheme =
-  window.matchMedia(
-    "(prefers-color-scheme: dark)"
+if (themeButton && themeMenu) {
+
+  themeButton.addEventListener(
+    "click",
+    function () {
+
+      const isOpen =
+        !themeMenu.hasAttribute("hidden");
+
+
+      if (isOpen) {
+
+        themeMenu.setAttribute(
+          "hidden",
+          ""
+        );
+
+      } else {
+
+        themeMenu.removeAttribute(
+          "hidden"
+        );
+
+      }
+
+    }
   );
 
+}
+
+
+/* ========================================
+   03. THEME CHOICES
+======================================== */
+
+themeChoices.forEach(function (button) {
+
+  button.addEventListener(
+    "click",
+    function () {
+
+      const selectedTheme =
+        button.getAttribute(
+          "data-theme-choice"
+        );
+
+
+      /*
+        Save user's choice.
+      */
+
+      localStorage.setItem(
+        "portfolio-theme",
+        selectedTheme
+      );
+
+
+      /*
+        Apply selected theme.
+      */
+
+      applyTheme(
+        selectedTheme
+      );
+
+
+      /*
+        Close menu.
+      */
+
+      if (themeMenu) {
+
+        themeMenu.setAttribute(
+          "hidden",
+          ""
+        );
+
+      }
+
+    }
+  );
+
+});
+
+
+/* ========================================
+   04. SYSTEM THEME CHANGES
+======================================== */
 
 systemTheme.addEventListener(
   "change",
@@ -349,18 +279,16 @@ systemTheme.addEventListener(
 
     const currentPreference =
       localStorage.getItem(
-        THEME_KEY
+        "portfolio-theme"
       ) || "system";
 
 
     /*
-       Only react automatically when
-       user selected System.
+      Only react automatically
+      when user selected System.
     */
 
-    if (
-      currentPreference === "system"
-    ) {
+    if (currentPreference === "system") {
 
       applyTheme("system");
 
@@ -370,182 +298,101 @@ systemTheme.addEventListener(
 );
 
 
-/* Apply theme on initial load */
-
-applyTheme(savedTheme);
-
-
 /* ========================================
-   5. MOBILE NAVIGATION
-======================================== */
-
-const navGroups =
-  nav.querySelectorAll(":scope > div");
-
-const mainNav =
-  navGroups[0];
-
-const externalNav =
-  navGroups[1];
-
-
-/*
-   Create mobile menu button.
-*/
-
-const menuButton =
-  document.createElement("button");
-
-menuButton.className =
-  "mobile-menu-button";
-
-menuButton.type =
-  "button";
-
-menuButton.setAttribute(
-  "aria-label",
-  "Open navigation menu"
-);
-
-menuButton.setAttribute(
-  "aria-expanded",
-  "false"
-);
-
-menuButton.innerHTML = `
-  <span></span>
-  <span></span>
-  <span></span>
-`;
-
-
-nav.insertBefore(
-  menuButton,
-  themeControl
-);
-
-
-/* Mobile menu state */
-
-let mobileMenuOpen = false;
-
-
-/* Toggle mobile navigation */
-
-function toggleMobileMenu() {
-
-  mobileMenuOpen =
-    !mobileMenuOpen;
-
-
-  body.classList.toggle(
-    "mobile-menu-open",
-    mobileMenuOpen
-  );
-
-
-  menuButton.setAttribute(
-    "aria-expanded",
-    String(mobileMenuOpen)
-  );
-
-
-  menuButton.setAttribute(
-    "aria-label",
-    mobileMenuOpen
-      ? "Close navigation menu"
-      : "Open navigation menu"
-  );
-
-}
-
-
-/* Button click */
-
-menuButton.addEventListener(
-  "click",
-  toggleMobileMenu
-);
-
-
-/* Close mobile menu */
-
-function closeMobileMenu() {
-
-  mobileMenuOpen = false;
-
-  body.classList.remove(
-    "mobile-menu-open"
-  );
-
-  menuButton.setAttribute(
-    "aria-expanded",
-    "false"
-  );
-
-  menuButton.setAttribute(
-    "aria-label",
-    "Open navigation menu"
-  );
-
-}
-
-
-/* Close when navigation link is clicked */
-
-mainNav
-  .querySelectorAll("a")
-  .forEach(function (link) {
-
-    link.addEventListener(
-      "click",
-      closeMobileMenu
-    );
-
-  });
-
-
-/* ========================================
-   6. ESCAPE KEY
+   05. CLOSE THEME MENU
 ======================================== */
 
 document.addEventListener(
-  "keydown",
+  "click",
   function (event) {
 
-    if (event.key !== "Escape") {
-      return;
+    if (
+      themeMenu &&
+      themeButton &&
+      !themeMenu.contains(event.target) &&
+      !themeButton.contains(event.target)
+    ) {
+
+      themeMenu.setAttribute(
+        "hidden",
+        ""
+      );
+
     }
-
-
-    closeMobileMenu();
-
-
-    themeMenu.hidden = true;
-
-    themeButton.setAttribute(
-      "aria-expanded",
-      "false"
-    );
 
   }
 );
 
 
 /* ========================================
-   7. HEADER SCROLL STATE
+   06. MOBILE MENU
 ======================================== */
 
-let lastScrollY = window.scrollY;
+const mobileMenuButton =
+  document.getElementById(
+    "mobileMenuButton"
+  );
+
+
+if (mobileMenuButton) {
+
+  mobileMenuButton.addEventListener(
+    "click",
+    function () {
+
+      document.body.classList.toggle(
+        "mobile-menu-open"
+      );
+
+    }
+  );
+
+}
+
+
+/* ========================================
+   07. CLOSE MOBILE MENU
+   AFTER CLICKING NAV LINK
+======================================== */
+
+const navigationLinks =
+  document.querySelectorAll(
+    ".nav-links a"
+  );
+
+
+navigationLinks.forEach(function (link) {
+
+  link.addEventListener(
+    "click",
+    function () {
+
+      document.body.classList.remove(
+        "mobile-menu-open"
+      );
+
+    }
+  );
+
+});
+
+
+/* ========================================
+   08. HEADER SCROLL EFFECT
+======================================== */
+
+const header =
+  document.querySelector("header");
 
 
 function updateHeader() {
 
-  const currentScroll =
-    window.scrollY;
+  if (!header) {
+    return;
+  }
 
 
-  if (currentScroll > 30) {
+  if (window.scrollY > 20) {
 
     header.classList.add(
       "header-scrolled"
@@ -559,150 +406,55 @@ function updateHeader() {
 
   }
 
-
-  lastScrollY =
-    currentScroll;
-
 }
 
 
 window.addEventListener(
   "scroll",
   updateHeader,
-  {
-    passive: true
-  }
+  { passive: true }
 );
 
 
-/* ========================================
-   8. ACTIVE NAVIGATION
-======================================== */
-
-const sections =
-  document.querySelectorAll(
-    "main section[id]"
-  );
-
-const navLinks =
-  document.querySelectorAll(
-    'nav a[href^="#"]'
-  );
-
-
-const sectionObserver =
-  new IntersectionObserver(
-    function (entries) {
-
-      entries.forEach(
-        function (entry) {
-
-          if (!entry.isIntersecting) {
-            return;
-          }
-
-
-          const sectionId =
-            entry.target.id;
-
-
-          navLinks.forEach(
-            function (link) {
-
-              link.classList.remove(
-                "nav-active"
-              );
-
-
-              if (
-                link.getAttribute(
-                  "href"
-                ) === `#${sectionId}`
-              ) {
-
-                link.classList.add(
-                  "nav-active"
-                );
-
-              }
-
-            }
-          );
-
-        }
-      );
-
-    },
-    {
-      rootMargin:
-        "-35% 0px -55% 0px"
-    }
-  );
-
-
-sections.forEach(
-  function (section) {
-
-    sectionObserver.observe(
-      section
-    );
-
-  }
-);
+updateHeader();
 
 
 /* ========================================
-   9. SCROLL REVEAL
+   09. SCROLL REVEAL
 ======================================== */
 
 const revealElements =
   document.querySelectorAll(
-    "section > div, article, #contact"
+    ".reveal"
   );
 
-
-/*
-   Don't animate if user has
-   requested reduced motion.
-*/
 
 if (
-  !prefersReducedMotion.matches
+  revealElements.length > 0 &&
+  "IntersectionObserver" in window
 ) {
-
-  revealElements.forEach(
-    function (element) {
-
-      element.classList.add(
-        "reveal"
-      );
-
-    }
-  );
-
 
   const revealObserver =
     new IntersectionObserver(
-      function (entries, observer) {
+      function (entries) {
 
         entries.forEach(
           function (entry) {
 
             if (
-              !entry.isIntersecting
+              entry.isIntersecting
             ) {
-              return;
+
+              entry.target.classList.add(
+                "reveal-visible"
+              );
+
+
+              revealObserver.unobserve(
+                entry.target
+              );
+
             }
-
-
-            entry.target.classList.add(
-              "reveal-visible"
-            );
-
-
-            observer.unobserve(
-              entry.target
-            );
 
           }
         );
@@ -724,174 +476,152 @@ if (
     }
   );
 
+} else {
+
+  /*
+    Fallback for older browsers.
+  */
+
+  revealElements.forEach(
+    function (element) {
+
+      element.classList.add(
+        "reveal-visible"
+      );
+
+    }
+  );
+
 }
 
 
 /* ========================================
-   10. CURRENT YEAR
+   10. ACTIVE NAVIGATION
 ======================================== */
 
-const footerYear =
-  document.querySelector(
-    "footer p"
+const sections =
+  document.querySelectorAll(
+    "main section[id]"
   );
 
 
-if (footerYear) {
-
-  footerYear.textContent =
-    `© ${new Date().getFullYear()} Nihal Singh Rai`;
-
-}
+const navLinks =
+  document.querySelectorAll(
+    ".nav-links a"
+  );
 
 
-/* ========================================
-   11. THEME-AWARE TECH BACKGROUND
-======================================== */
+if (
+  sections.length > 0 &&
+  navLinks.length > 0 &&
+  "IntersectionObserver" in window
+) {
 
-function updateTechnicalBackground() {
+  const sectionObserver =
+    new IntersectionObserver(
+      function (entries) {
 
-  const styleId =
-    "dynamic-theme-background";
+        entries.forEach(
+          function (entry) {
 
-  let style =
-    document.getElementById(
-      styleId
+            if (
+              entry.isIntersecting
+            ) {
+
+              navLinks.forEach(
+                function (link) {
+
+                  link.classList.remove(
+                    "nav-active"
+                  );
+
+                }
+              );
+
+
+              const activeLink =
+                document.querySelector(
+                  `.nav-links a[href="#${entry.target.id}"]`
+                );
+
+
+              if (activeLink) {
+
+                activeLink.classList.add(
+                  "nav-active"
+                );
+
+              }
+
+            }
+
+          }
+        );
+
+      },
+      {
+        rootMargin:
+          "-35% 0px -55% 0px"
+      }
     );
 
 
-  if (!style) {
+  sections.forEach(
+    function (section) {
 
-    style =
-      document.createElement(
-        "style"
+      sectionObserver.observe(
+        section
       );
 
-    style.id =
-      styleId;
-
-    document.head.appendChild(
-      style
-    );
-
-  }
-
-
-  const isDark =
-    document.documentElement.dataset.theme ===
-    "dark";
-
-
-  if (isDark) {
-
-    style.textContent = `
-
-      .tech-bg {
-        background: #111111;
-      }
-
-      .tech-grid {
-        background-image:
-          linear-gradient(
-            rgba(250, 249, 246, 0.035) 1px,
-            transparent 1px
-          ),
-          linear-gradient(
-            90deg,
-            rgba(250, 249, 246, 0.035) 1px,
-            transparent 1px
-          );
-      }
-
-      .tech-orbit {
-        border-color:
-          rgba(250, 249, 246, 0.055);
-      }
-
-    `;
-
-  } else {
-
-    style.textContent = `
-
-      .tech-bg {
-        background: #FAF9F6;
-      }
-
-      .tech-grid {
-        background-image:
-          linear-gradient(
-            rgba(17, 17, 17, 0.035) 1px,
-            transparent 1px
-          ),
-          linear-gradient(
-            90deg,
-            rgba(17, 17, 17, 0.035) 1px,
-            transparent 1px
-          );
-      }
-
-      .tech-orbit {
-        border-color:
-          rgba(17, 17, 17, 0.045);
-      }
-
-    `;
-
-  }
+    }
+  );
 
 }
 
 
-/*
-   Re-run whenever theme changes.
-*/
+/* ========================================
+   11. CURRENT YEAR
+======================================== */
 
-const originalApplyTheme =
-  applyTheme;
-
-applyTheme = function (theme) {
-
-  originalApplyTheme(theme);
-
-  updateTechnicalBackground();
-
-};
+const yearElement =
+  document.querySelector(
+    "[data-current-year]"
+  );
 
 
-/* Apply once */
+if (yearElement) {
 
-updateTechnicalBackground();
+  yearElement.textContent =
+    new Date().getFullYear();
+
+}
 
 
 /* ========================================
-   12. REDUCED MOTION CHANGE
+   12. ESCAPE KEY
 ======================================== */
 
-prefersReducedMotion.addEventListener(
-  "change",
+document.addEventListener(
+  "keydown",
   function (event) {
 
-    if (event.matches) {
+    if (event.key === "Escape") {
 
-      document
-        .querySelectorAll(".reveal")
-        .forEach(function (element) {
+      if (themeMenu) {
 
-          element.classList.add(
-            "reveal-visible"
-          );
+        themeMenu.setAttribute(
+          "hidden",
+          ""
+        );
 
-        });
+      }
+
+
+      document.body.classList.remove(
+        "mobile-menu-open"
+      );
 
     }
 
   }
 );
-
-
-/* ========================================
-   13. INITIALIZE
-======================================== */
-
-updateHeader();
