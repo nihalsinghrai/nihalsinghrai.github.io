@@ -1,3 +1,4 @@
+alert("JavaScript is working");
 /* ========================================
    NIHAl SINGH RAI — PORTFOLIO JS
 ======================================== */
