@@ -1,0 +1,31 @@
+# Nihal Singh Rai (nihalsinghrai)
+
+> Nihal Singh Rai is an automation developer in India. He builds systems that handle repetitive business work: finding and ranking leads, taking bookings and routing approvals. His work sits between messaging platforms, data stores and AI models, and he is learning full stack web development. He is open to automation and AI agent work.
+
+## Site
+
+- [Portfolio](https://nihalsinghrai.github.io/): about, two automation case studies, stack, FAQ and contact
+- [Full portfolio text](https://nihalsinghrai.github.io/llms-full.txt): complete text of the site in one file for language models
+
+## Work
+
+- [Daily Dental Lead Finder](https://nihalsinghrai.github.io/#work): n8n workflow that finds new dental clinics every morning, scores each out of 100, saves the top 30 to Google Sheets and emails an HTML report (in use, for own lead generation)
+- [Samayu Dental Clinic booking automation](https://nihalsinghrai.github.io/#work): WhatsApp and form appointment booking with duplicate checks, UPI QR fee message and admin YES/NO approval (test build with demo data, no clinic is using it yet)
+
+## Key facts
+
+- Name: Nihal Singh Rai (alternate name: nihalsinghrai)
+- Role: Automation Developer, India
+- Focus: agentic AI, workflows, APIs
+- Automation: n8n
+- Languages: Python, JavaScript
+- Databases: PostgreSQL, MongoDB, Supabase
+- Integrations: REST APIs, WhatsApp Business API, Telegram Bot API, Google Workspace APIs, Gemini API, OpenAI, Groq
+- Learning: full stack web development
+- Contact: contact.nihalsinghrai@gmail.com
+
+## Profiles
+
+- [GitHub](https://github.com/nihalsinghrai)
+- [LinkedIn](https://www.linkedin.com/in/nihalsinghrai)
+- [X](https://x.com/NIHALSINGHRAI_)

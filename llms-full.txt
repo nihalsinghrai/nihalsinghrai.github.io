@@ -1,0 +1,107 @@
+# Nihal Singh Rai (nihalsinghrai) - Full Portfolio Text
+
+Source: https://nihalsinghrai.github.io/
+
+Nihal Singh Rai, known online as nihalsinghrai, is an automation developer in India. He turns repetitive business work into automated systems, so leads, bookings and follow-ups run on their own and nothing slips through.
+
+## About
+
+How I work: I build workflows that do one job reliably: clear inputs, predictable outputs, and failures that are logged and visible. My work sits between messaging platforms, data stores and AI models. I am learning full stack development to build the front and back end myself.
+
+- Focus: agentic AI, workflows, APIs
+- Databases: PostgreSQL, MongoDB, Supabase
+
+## Work
+
+Two automation builds. Each one has the problem, the solution, how it works and the tools.
+
+### 1. Daily Dental Lead Finder: AI-ranked lead generation, delivered by email
+
+Status: in use, own lead generation.
+
+Problem: A freelance automation developer needs a steady flow of possible clients. Searching Google Maps by hand takes hours, the same clinics keep showing up, and there is no clear way to decide who to contact first.
+
+Solution: Every morning the workflow finds new dental clinics in different Indian cities, drops the ones already seen, scores each clinic out of 100, saves the best 30 to a Google Sheet and emails a ready-to-use HTML report.
+
+How it works:
+1. Runs at 9 AM every day, or on demand from Telegram.
+2. Picks 3 cities of the day from a pool of 100+ Indian cities and searches 4 clinic types in each: 12 Google Maps searches through the Serper API.
+3. Cleans every result into one record: name, category, address, phone, website, rating, review count, Maps link and a unique key.
+4. Keeps clinics that look busy and reachable: a phone number, at least 25 reviews and a rating of 3.8 or more.
+5. Removes repeats within the run, skips any clinic sent in earlier runs, and keeps the 45 busiest.
+6. Opens each clinic website and picks up an email address when one is published.
+7. An AI model (GPT-4o-mini, with Groq as fallback) reads each record and returns structured JSON: clinic type, payment capacity, main problem, how the booking system can help, and a contact note.
+8. The final ranking is calculated in code, not by the AI. The top 30 go to the sheet and the email report, and a short summary goes to Telegram.
+
+Lead score (out of 100):
+- Clinic size (review volume): up to 40
+- Rating quality: up to 20
+- Need for online booking: up to 25
+- Reachability (phone, email): up to 15
+
+The AI explains each clinic in plain language. The score itself comes from fixed rules, so the ranking is repeatable and easy to adjust.
+
+Google Sheet: one row per lead, 18 columns (Date, Business Name, Business Type, Phone, Email, Website, Address, Rating, Reviews, Lead Score, Status, Contact Status, Main Problem, How We Can Help, Maps Link, Verified, Budget Fit, Contact Note). New leads start as Status: New and Contact Status: Not contacted, so the sheet works as a simple pipeline.
+
+Email report: an HTML dashboard sent through Gmail with summary cards, a lead-quality note and a ranked table with score badges, tap-to-call, WhatsApp, website and Maps links, each clinic's problem and fix, and a button that opens the sheet. The layout adapts to phone screens. The preview on the site uses placeholder data, not real leads.
+
+Built-in honesty: the report says these are publicly listed clinics, not confirmed buyers, and that the AI score only helps prioritise. The report goes to the developer's own inbox, and the workflow does not message any clinic. Failed runs trigger a separate error workflow.
+
+Tools: n8n, Serper (Google Maps), OpenAI GPT-4o-mini, Groq, Google Sheets, Gmail, Telegram Bot API, JavaScript.
+
+### 2. Samayu Dental Clinic: WhatsApp and form appointment booking automation
+
+Status: test build with demo data. It was built to show the full booking flow, and no clinic is using it yet.
+
+Problem: Small clinics take bookings by phone and chat. Calls get missed, details are typed by hand, double bookings happen, and fee payment is chased manually.
+
+Solution: A booking system where patients book from a form or by chatting on WhatsApp. Duplicates are caught, the fee and UPI QR are sent automatically, the admin approves with a single YES or NO, and the calendar event is created only after staff confirm.
+
+How it works:
+1. Form booking: a Tally form submission reaches an n8n webhook and is parsed. If details are missing, the patient gets a message asking for them.
+2. The booking is checked against the Bookings tab. A duplicate gets a clear reply instead of a second booking.
+3. The fee is read from the Fees tab, the booking is saved, the patient gets a WhatsApp message with the UPI QR image, and the admin is notified.
+4. Chat booking: a patient messages on WhatsApp. A conversation flow reads the Sessions, Fees and FAQ tabs, answers questions, collects details step by step and saves the booking.
+5. Admin approval: the admin replies YES or NO on WhatsApp. The workflow checks the command and that the booking is still pending, updates the sheet and tells the patient. YES creates a Google Calendar event, and a failure alerts the admin.
+6. Staff confirmation: a separate webhook checks a secret and rejects unknown requests. It checks slot times and conditions, creates the calendar event, updates the status and sends the patient a WhatsApp confirmation.
+
+Tools: n8n, Tally, WhatsApp Business API, Google Sheets, Google Calendar, UPI QR, JavaScript.
+
+## Stack
+
+- Automation: n8n
+- Languages: Python, JavaScript
+- Databases: PostgreSQL, MongoDB, Supabase
+- APIs and integration: REST APIs, WhatsApp Business API, Telegram Bot API, Google Workspace APIs, GitHub API, Gemini API
+- AI models: OpenAI, Groq, Gemini
+- Learning: full stack web development
+
+## FAQ
+
+Q: Who is Nihal Singh Rai?
+A: Nihal Singh Rai (nihalsinghrai) is an automation developer in India. He builds systems that handle repetitive business work, such as finding and ranking leads, taking bookings and routing approvals, and he is learning full stack web development.
+
+Q: What business problems does he solve with automation?
+A: Manual lead research, missed or duplicate bookings, slow follow-ups and scattered records. He replaces them with workflows that run on a schedule or on demand, keep records in Google Sheets or a database, and ask a person to decide only when a decision is needed.
+
+Q: Which tools and technologies does he use?
+A: n8n for workflow automation, Python and JavaScript, PostgreSQL, MongoDB and Supabase for data, REST APIs, WhatsApp Business API, Telegram Bot API, Google Workspace APIs, and AI models from OpenAI, Groq and Gemini.
+
+Q: How does the dental lead finder rank leads?
+A: Each clinic is scored out of 100 in code: review volume (up to 40), rating (up to 20), need for online booking (up to 25) and reachability by phone or email (up to 15). The top 30 are saved to a Google Sheet and emailed as an HTML report every day.
+
+Q: How can I contact Nihal Singh Rai?
+A: Email contact.nihalsinghrai@gmail.com, or reach him on LinkedIn, GitHub or X.
+
+## Contact
+
+Open to automation and AI agent work. Send a short note about the process you want to automate.
+
+- Email: contact.nihalsinghrai@gmail.com
+- GitHub: https://github.com/nihalsinghrai
+- LinkedIn: https://www.linkedin.com/in/nihalsinghrai
+- X: https://x.com/NIHALSINGHRAI_
+
+## Structured data
+
+{"@context":"https://schema.org","@type":"Person","name":"Nihal Singh Rai","alternateName":"nihalsinghrai","jobTitle":"Automation Developer","email":"contact.nihalsinghrai@gmail.com","url":"https://nihalsinghrai.github.io/","sameAs":["https://github.com/nihalsinghrai","https://www.linkedin.com/in/nihalsinghrai","https://x.com/NIHALSINGHRAI_"]}
