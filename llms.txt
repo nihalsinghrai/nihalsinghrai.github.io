@@ -1,0 +1,30 @@
+# Nihal Singh Rai
+
+> Also known as Nihal Singh or Nihal. Automation developer progressing towards AI engineering. Builds automation workflows and explores practical AI-powered solutions that help businesses streamline repetitive processes, manage leads and improve operational workflows.
+
+## Services
+- WhatsApp automation
+- n8n workflow automation
+- Lead generation and lead scraping
+- AI agents and AI integration
+- Business process automation
+- API integration
+- CRM integration
+
+## Projects (statuses are updated as they are verified)
+- Samayu Dental Clinic WhatsApp automation
+- Dental clinic lead scraper
+- Skin clinic WhatsApp automation
+- Telegram automation (experiment)
+
+## Pages
+- Home: https://nihalsinghrai.github.io/
+- FAQ: https://nihalsinghrai.github.io/faq/
+
+## Links
+- GitHub: https://github.com/nihalsinghrai
+- LinkedIn: https://www.linkedin.com/in/nihalsinghrai/
+- X: https://x.com/NIHALSINGHRAI_
+
+## Contact
+- Email: contact.nihalsinghrai@gmail.com
