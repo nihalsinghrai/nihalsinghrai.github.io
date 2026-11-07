@@ -111,6 +111,9 @@ details p{margin:0 0 16px;color:var(--muted)}
 .hp{position:absolute;left:-9999px}
 .crumb{font-size:14px;color:var(--muted);margin:28px 0 14px}
 
+.vid{display:block;width:100%;max-width:300px;height:auto;aspect-ratio:9/16;background:#000;border:2px solid var(--line);border-radius:var(--r-l);margin:0 auto}
+.wf{display:block;width:100%;height:auto;border:2px solid var(--line);border-radius:var(--r-l);background:#fff}
+.media-note{font-size:13px;color:var(--muted);text-align:center;margin:8px 0 0}
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -205,12 +208,12 @@ details p{margin:0 0 16px;color:var(--muted)}
 <h2>Projects and demonstrations</h2>
 <p class="sub">Details are listed only where verified. Statuses are updated as each project is confirmed.</p>
 <article class="case">
-<div class="shot" role="img" aria-label="Placeholder for project screenshot or demo video">Screenshot / demo video placeholder</div>
+<div><video class="vid" src="dental-demo.mp4" controls playsinline preload="metadata" aria-label="Demo: Samayu Dental Clinic WhatsApp appointment booking, with sample data"></video><p class="media-note">Demo with sample data. <a href="dental-demo.mp4">Video open nahi ho raha? Yahan kholein</a></p></div>
 <div>
-<span class="tag blue">Status: to be confirmed</span>
+<span class="tag blue">Status: Demo</span>
 <h3 style="font-size:1.8rem;margin-top:10px">Samayu Dental Clinic WhatsApp automation</h3>
-<p style="color:var(--muted)">Problem: replying to appointment enquiries by hand. Intended workflow: an enquiry arrives, an automatic reply is sent and the details are saved to a sheet or CRM.</p>
-<div class="chips"><span class="tag">WhatsApp</span></div>
+<p style="color:var(--muted)">Problem: replying to appointment enquiries by hand. Demo workflow: the customer messages on WhatsApp, the bot asks which treatment is needed, and the booking appears in Google Sheets with an Approved or Pending status and in Google Calendar.</p>
+<div class="chips"><span class="tag">WhatsApp</span><span class="tag">Google Sheets</span><span class="tag">Google Calendar</span></div>
 <a class="btn" href="https://github.com/nihalsinghrai" rel="noopener">View GitHub profile</a>
 </div>
 </article>
@@ -220,15 +223,13 @@ details p{margin:0 0 16px;color:var(--muted)}
 <h2>More projects and experiments</h2>
 <p class="sub">Status labels are updated as each project is verified.</p>
 <div class="grid three">
-<article class="card"><div class="shot" role="img" aria-label="Placeholder for project screenshot">Screenshot placeholder</div><span class="tag blue">Status: to confirm</span><h3>Dental clinic lead scraper</h3>
-<dl><dt>Problem</dt><dd>Collecting clinic details by hand is slow.</dd><dt>Workflow</dt><dd>Collect names, phone numbers and areas from public listings into one sheet.</dd></dl>
+<article class="card"><img class="wf" src="lead-scraper-workflow.png" alt="n8n workflow for the dental lead scraper: daily schedule, Google Maps search, filtering, website check, AI lead scoring, Google Sheets and a Gmail dashboard" loading="lazy" width="993" height="278"><span class="tag blue">Status: to confirm</span><h3>Dental clinic lead scraper</h3>
+<dl><dt>Problem</dt><dd>Collecting clinic details by hand is slow.</dd><dt>Workflow</dt><dd>Runs daily at 8 AM IST, searches Google Maps listings, keeps only new clinics not already in the sheet, checks each clinic website, scores the lead with OpenAI, keeps leads scoring 75 or more, saves them to Google Sheets and sends a daily dashboard by Gmail.</dd></dl>
 <a class="btn" href="https://github.com/nihalsinghrai" rel="noopener">View on GitHub</a></article>
-<article class="card"><div class="shot" role="img" aria-label="Placeholder for project screenshot">Screenshot placeholder</div><span class="tag blue">Status: to confirm</span><h3>Skin clinic WhatsApp automation</h3>
+<article class="card"><div><video class="vid" src="skin-demo.mp4" controls playsinline preload="metadata" aria-label="Demo: Samayu Skin Clinic WhatsApp appointment booking, with sample data"></video><p class="media-note">Demo with sample data. <a href="skin-demo.mp4">Video open nahi ho raha? Yahan kholein</a></p></div><span class="tag blue">Status: Demo</span><h3>Skin clinic WhatsApp automation</h3>
 <dl><dt>Problem</dt><dd>Replies to enquiries and follow-ups are slow.</dd><dt>Workflow</dt><dd>An enquiry arrives, an automatic reply is sent and the team is alerted.</dd></dl>
 <a class="btn" href="https://github.com/nihalsinghrai" rel="noopener">View on GitHub</a></article>
-<article class="card"><div class="shot" role="img" aria-label="Placeholder for demo video">Demo video placeholder</div><span class="tag exp">Experiment</span><h3>Telegram automation</h3>
-<dl><dt>Problem</dt><dd>Routine updates and tasks are done manually.</dd><dt>Workflow</dt><dd>A Telegram bot message triggers a workflow.</dd></dl>
-<a class="btn" href="https://github.com/nihalsinghrai" rel="noopener">View on GitHub</a></article>
+
 </div>
 </div></section>
 
@@ -240,7 +241,7 @@ details p{margin:0 0 16px;color:var(--muted)}
 <div class="card"><h3>Automation</h3><div class="chips"><span class="tag blue">n8n</span><span class="tag blue">Workflow automation</span><span class="tag blue">Webhooks</span></div></div>
 <div class="card"><h3>Programming</h3><div class="chips"><span class="tag blue">JavaScript</span><span class="tag blue">Python</span><span class="tag blue">HTML</span><span class="tag blue">CSS</span></div></div>
 <div class="card"><h3>Databases</h3><div class="chips"><span class="tag blue">SQL</span><span class="tag blue">PostgreSQL</span><span class="tag blue">Supabase</span><span class="tag exp">MongoDB</span></div></div>
-<div class="card"><h3>APIs and integrations</h3><div class="chips"><span class="tag blue">REST APIs</span><span class="tag blue">WhatsApp API</span><span class="tag blue">Telegram Bot API</span><span class="tag exp">CRM integrations</span></div></div>
+<div class="card"><h3>APIs and integrations</h3><div class="chips"><span class="tag blue">REST APIs</span><span class="tag blue">WhatsApp API</span><span class="tag exp">CRM integrations</span></div></div>
 <div class="card"><h3>AI technologies</h3><div class="chips"><span class="tag exp">LLM integrations</span><span class="tag exp">AI agents</span></div></div>
 <div class="card"><h3>Hosting and tools</h3><div class="chips"><span class="tag blue">Git</span><span class="tag blue">GitHub</span><span class="tag blue">GitHub Pages</span></div></div>
 </div>
